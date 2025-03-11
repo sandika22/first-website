@@ -1,0 +1,177 @@
+<html lang="en">
+  <head>
+    <link rel="icon" type="jpg" href="foto/home-removebg-preview.png" />
+    <title>beranda</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        background: #27272c;
+      }
+      button {
+        position: relative;
+        background: #c300ff;
+        color: #c300ff;
+        text-decoration: none;
+        text-transform: uppercase;
+        border: none;
+        letter-spacing: 0.1rem;
+        font-size: 2rem;
+        padding: 1rem 2rem;
+        justify-content: center; /* Menengahkan teks secara horizontal */
+        align-items: center; /* Menengahkan teks secara vertikal */
+        transition: 0.2s;
+      }
+      button:hover {
+        letter-spacing: 0.5rem;
+        padding: 1.3rem 3.1rem;
+        background: var(--clr);
+        color: var(--clr);
+        /* box-shadow: 0 0 35px var(--clr); */
+        animation: box 3s infinite;
+      }
+      button::before {
+        content: "";
+        position: absolute;
+        inset: 2px;
+        background: #272822;
+      }
+      button span {
+        position: relative;
+        z-index: 1;
+      }
+      button i {
+        position: absolute;
+        inset: 0;
+        display: block;
+      }
+
+      button i::before {
+        content: "";
+        position: absolute;
+        width: 30px;
+        height: 8px;
+        left: 80%;
+        top: -5px;
+        border: 2px solid var(--clr);
+        background: #272822;
+        transition: 0.2s;
+      }
+
+      button:hover i::before {
+        width: 15px;
+        left: 20%;
+        animation: move 3s infinite;
+      }
+
+      button i::after {
+        content: "";
+        position: absolute;
+        width: 30px;
+        height: 8px;
+        left: 20%;
+        bottom: -5px;
+        border: 2px solid var(--clr);
+        background: #272822;
+        transition: 0.2s;
+      }
+
+      button:hover i::after {
+        width: 15px;
+        left: 80%;
+        animation: move 3s infinite;
+      }
+
+      @keyframes move {
+        0% {
+          transform: translateX(0);
+        }
+        50% {
+          transform: translateX(30px);
+        }
+        100% {
+          transform: translateX(0);
+        }
+      }
+
+      @keyframes box {
+        0% {
+          box-shadow: #27272c;
+        }
+        50% {
+          box-shadow: 0 0 50px var(--clr);
+        }
+        100% {
+          box-shadow: #27272c;
+        }
+      }
+
+      @media (max-width: 768px) {
+        button {
+          width: 300px; /* Lebar tombol di perangkat lebih kecil */
+          height: 80px; /* Tinggi tombol di perangkat lebih kecil */
+          font-size: 1.8rem; /* Ukuran font lebih kecil untuk tampilan mobile */
+        }
+      }
+
+      @media (min-width: 769px) {
+        button {
+          width: 700px; /* Lebar tombol di perangkat lebih besar */
+          height: 200px; /* Tinggi tombol di perangkat lebih besar */
+          font-size: 4rem;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <a
+      class="group relative inline-flex items-center overflow-hidden rounded-sm border border-current px-8 py-3 text-purple-600 focus:ring-3 focus:outline-hidden"
+      href="gallery.html"
+    >
+      <button style="--clr: #39ff14">
+        <span
+          class="text-sm font-bold transition-all group-hover:me-4 py-2 px-8 rounded w-32 text-center"
+          >gallery</span
+        ><i></i>
+      </button>
+    </a>
+    <a
+      class="group relative inline-flex items-center overflow-hidden rounded-sm border border-current px-8 py-3 text-purple-600 focus:ring-3 focus:outline-hidden"
+      href="time.html"
+    >
+      <button style="--clr: #ff44cc">
+        <span
+          class="text-sm font-bold transition-all group-hover:me-4 py-2 px-8 rounded w-32 text-center"
+          >Time</span
+        ><i></i>
+      </button>
+    </a>
+    <a
+      class="group relative inline-flex items-center overflow-hidden rounded-sm border border-current px-8 py-3 text-purple-600 focus:ring-3 focus:outline-hidden"
+      href="Message.html"
+    >
+      <button style="--clr: #0ff0fc"><span>Message</span><i></i></button>
+    </a>
+    <a
+      class="group relative inline-flex items-center overflow-hidden rounded-sm border border-current px-8 py-3 text-purple-600 focus:ring-3 focus:outline-hidden"
+      href="https://wa.me/6289646751312?text=aku butuh bantuan!"
+    >
+      <button style="--clr: #ffff00">
+        <span
+          class="text-sm font-bold transition-all group-hover:me-4 py-2 px-8 rounded w-32 text-center"
+          >KONTAK</span
+        ><i></i>
+      </button>
+    </a>
+  </body>
+</html>

@@ -1,0 +1,130 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Message</title>
+    <link rel="icon" type="jpg" href="foto/kita.jpeg" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"></link>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-purple-200">
+    <header class="bg-purple-600 text-white p-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-2xl font-bold">halo buy</h1>
+            <nav>
+                <ul class="flex space-x-4">
+                    <li><a href="home.html" class="hover:bg-white hover:text-purple-900 rounded-lg">Home</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container mx-auto mt-8 p-4">
+        <div class="backdrop-blur-md p-6 rounded-lg shadow-lg border border-purple-500">
+            <h2 class="text-xl font-bold mb-4 text-white">Buat pesan baru</h2>
+            <form id="noteForm" class="space-y-4">
+                <div>
+                    <label for="title" class="block text-sm text-white">Nama</label>
+                    <input type="text" id="title" name="title" class="w-full px-4 py-2 text-white bg-purple-900 bg-opacity-50 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600" placeholder="Vierna">
+                </div>
+                <div>
+                    <label for="content" class="block text-sm mb-1 text-white">Isi pesan</label>
+                    <textarea id="content" name="content" rows="4" class="w-full px-4 py-2 text-white bg-purple-900 bg-opacity-50 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600" placeholder="I Love You"></textarea>
+                </div>
+                <button type="submit" class="w-full bg-purple-600 text-white p-2 rounded-md hover:bg-purple-700">Kirim pesan</button>
+            </form>
+        </div>
+
+        <div class="mt-8 backdrop-blur-md p-6 rounded-lg shadow-lg border border-purple-500">
+            <h2 class="text-xl font-bold mb-4 text-white">Pesan kamu</h2>
+            <div id="notesList" class="space-y-4">
+                <!-- testinya -->
+                <div class="w-full px-4 py-2 text-white bg-purple-900 bg-opacity-50 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600">
+                    <div class="flex justify-between items-center">
+                        <h3 class="text-lg font-bold text-white">nama</h3>
+                        <button class="text-red-500 hover:text-red-700"><i class="fas fa-trash-alt"></i></button>
+                    </div>
+                    <p class="mt-2 text-white">Kalo kamu mau bilang sesuatu tapi gaberani atau gabisa atau gengsi ngomong langsung, kirim kesini aja, aku selalu buka webnya, biar aku bisa baca juga, begitupun aku, kalo gaberani bilang mungkin aku bakal bilang disini dengan harapan kamu bakal baca hehehehe</p>
+                </div>
+                <!-- end testi -->
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-purple-800 text-white p-4 mt-8">
+        <div class="container mx-auto text-center">
+            <p>© created by sandika ramadan.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('noteForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const title = document.getElementById('title').value;
+            const content = document.getElementById('content').value;
+            const now = new Date();
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
+            const formattedDate = now.toLocaleDateString('en-US', options);
+
+            if (title && content) {
+                const note = {
+                    title: title,
+                    content: content,
+                    date: formattedDate
+                };
+
+                saveNoteToLocalStorage(note);
+                addNoteToDOM(note);
+
+                document.getElementById('title').value = '';
+                document.getElementById('content').value = '';
+            }
+        });
+
+        function saveNoteToLocalStorage(note) {
+            let notes = JSON.parse(localStorage.getItem('notes')) || [];
+            notes.unshift(note);
+            localStorage.setItem('notes', JSON.stringify(notes));
+        }
+
+        function loadNotesFromLocalStorage() {
+            const notes = JSON.parse(localStorage.getItem('notes')) || [];
+            notes.forEach(note => addNoteToDOM(note));
+        }
+
+        function addNoteToDOM(note) {
+            const noteList = document.getElementById('notesList');
+            const noteItem = document.createElement('div');
+            noteItem.className = 'bg-white p-4 rounded-lg shadow-lg border border-purple-500';
+            noteItem.innerHTML = `
+                <div class="flex justify-between items-center">
+                    <h3 class="text-lg font-bold">${note.title}</h3>
+                    <button class="text-red-500 hover:text-red-700"><i class="fas fa-trash-alt"></i></button>
+                </div>
+                <p class="mt-2 text-gray-700">${note.content}</p>
+                <p class="mt-2 text-gray-500 text-sm">${note.date}</p>
+            `;
+            noteList.prepend(noteItem);
+        }
+
+        // Load notes from local storage on page load
+        window.onload = loadNotesFromLocalStorage;
+
+        // Function to change background image
+        function changeBackground(imageUrl) {
+            document.body.style.backgroundImage = `url(${imageUrl})`;
+            document.body.style.backgroundSize = 'cover';
+            document.body.style.backgroundAttachment = 'fixed';
+        }
+
+        // Change background image to your own photo
+        changeBackground('foto/messeg.jpg');  // Ganti dengan path gambar Anda
+    </script>
+</body>
+</html>
